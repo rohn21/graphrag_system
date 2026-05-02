@@ -37,8 +37,6 @@ This project builds a GraphRAG system that extracts entities and relationships f
 | `frontend/src/GraphView.jsx` | Graph visualization component. |
 | `frontend/src/ChatPanel.jsx` | Chat interface component. |
 | `frontend/src/App.jsx` | Main frontend app component. |
-| `.env` | Stores API keys and database credentials. |
-| `.gitignore` | Prevents secrets from being committed. |
 
 ## Setup steps
 
