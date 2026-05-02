@@ -1,0 +1,51 @@
+# LLM Prompt Injection: Concepts and Defenses
+
+Prompt injection is a security vulnerability in LLM applications where malicious text changes the model’s behavior or output in unintended ways. It can be hidden inside user prompts, documents, web pages, PDFs, emails, or any other content that the model later processes.
+
+## Direct Prompt Injection
+
+Direct prompt injection happens when an attacker sends malicious instructions directly to the LLM through the chat prompt or form input. The attacker tries to override the system rules by saying things like “ignore previous instructions” or “reveal your system prompt.”
+
+## Indirect Prompt Injection
+
+Indirect prompt injection happens when malicious instructions are hidden inside external content that the model reads later. The attacker does not talk to the LLM directly. Instead, the model encounters the malicious text while reading documents, web pages, emails, PDFs, or retrieved search results.
+
+Indirect prompt injection is especially dangerous in RAG systems. A user may ask a normal question, but the retriever brings back poisoned content, and the model may follow the hidden instructions as if they were trusted.
+
+## Why Indirect Prompt Injection Is Dangerous
+
+Indirect prompt injection can cause data leakage, policy bypass, misinformation, phishing, unsafe tool usage, and unauthorized actions. If the model has access to email, files, databases, or external APIs, the hidden instructions can trigger real harmful behavior.
+
+## Related Term: RAG Poisoning
+
+RAG poisoning is a form of indirect prompt injection where malicious text is inserted into knowledge bases or retrieval indexes. When the system retrieves that content, the model may treat attacker-controlled text as trusted context.
+
+## Real-World Impact Patterns
+
+- Reveal hidden system instructions.
+- Exfiltrate private data from connected tools.
+- Trick the assistant into sending malicious replies or links.
+- Force unsafe or misleading outputs.
+- Manipulate RAG answers by poisoning retrieved documents.
+- Abuse tool-calling workflows to take actions outside intended scope.
+
+## Defensive Measures
+
+### Least Privilege
+Give the model only the minimum tools, permissions, and data required for its task.
+
+### Context Isolation
+Keep system instructions, developer instructions, and user-provided text clearly separated.
+
+### Input Filtering
+Use keyword rules, heuristics, or classifiers to detect common jailbreak language and suspicious instruction-heavy text.
+
+### Output Review
+Use a second safety layer or policy checker to review the model’s response before it reaches the user or triggers tools.
+
+### Monitoring and Red Teaming
+Log suspicious prompts, repeated attempts, unusually long inputs, and failures in guardrails. Regular adversarial testing helps find injection paths before attackers do.
+
+## Practical Takeaway
+
+Prompt injection is a systems-security problem, not just a chat problem. The safest design is defense in depth: isolate untrusted content, limit privileges, and validate both inputs and outputs.
